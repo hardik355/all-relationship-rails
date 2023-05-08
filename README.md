@@ -1,24 +1,58 @@
-# README
+#I have created all relationship example.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#1. Has One & Belongs To
 
-Things you may want to cover:
+  Example 1:
+    User     has_one :pancard
+    PanCard  belongs_to :user
 
-* Ruby version
+    rails g controller User
+    rails g model User User name:string country:string
+    rails g model PanCard pan_number:bigint user:references
 
-* System dependencies
 
-* Configuration
+  Example 2:
+    User     has_one :biography
+    Biography  belongs_to :user
 
-* Database creation
+    User Controller + Model already have created
+    rails g model Biography bio:text user:references
 
-* Database initialization
+#2. Has Many
 
-* How to run the test suite
+  Example 1:
+    Car   has_many :parts
+    Part  belongs_to :user
 
-* Services (job queues, cache servers, search engines, etc.)
+  Example 2:
+    Mobile   has_many :apps
+    App      belongs_to :mobile
 
-* Deployment instructions
+#3. HABTM
 
-* ...
+  Example 1:
+  Example 2:
+
+#4. Polymorphic
+    How to create impliment a polymorphic relationship.
+
+  Example 1:
+      User      has_many :address
+      address   belongs_to :user
+
+  Example 2:
+    Post  has_many :comments
+    Article has_many :comments
+
+    comments: belongs_to :post
+
+
+#5. Has One Through
+
+  Example 1:
+  Example 2:
+
+#6. Has Many Through
+
+  Example 1:
+  Example 2:
