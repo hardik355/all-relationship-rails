@@ -1,0 +1,28 @@
+<%= link_to 'New Artist', artists_new_path %></br>
+<%= link_to 'New Song', songs_new_path %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Song</th>
+      <th scope="col">Artist</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Show</th>
+      <th scope="col">Destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @songs.each_with_index do |song, idx|%>
+    <tr>
+      <th scope="row"><%= idx %></th>
+      <th scope="row"><%= song.name %></th>
+      <th scope="row"><%= song.artist.name %></th>
+
+      <th scope="row"><%= link_to 'Edit', edit_song_path(id: song.id) %></th>
+      <th scope="row"><%= link_to 'Show', song_path(id: song.id) %></th>
+      <th scope="row"><%= link_to 'Destroy', song_path(song), data: { turbo_method: :delete } %></th>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
