@@ -1,2 +1,31 @@
 <%= link_to 'New Post', posts_new_path %><br>
 <%= link_to 'All Tags', tags_path %>
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Post Title</th>
+      <th scope="col">TAGS</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Show</th>
+      <th scope="col">Destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each_with_index do |post, idx|%>
+    <tr>
+      <th scope="row"><%= idx %></th>
+      <th scope="row"><%= post.title %></th>
+      <th scope="row"><%= post.tags.pluck(:name) %></th>
+
+      <th scope="row"><%= link_to 'Edit', edit_path(id: post.id) %></th>
+      <th scope="row"><%= link_to 'Show', post_path(id: post.id) %></th>
+      <th scope="row"><%= link_to 'Destroy', post_path(post), data: { turbo_method: :delete } %></th>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>

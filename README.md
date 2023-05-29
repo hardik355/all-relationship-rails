@@ -79,20 +79,38 @@ Example 1:
   rails g scaffold post title:text description:text
   rails g scaffold tag title:text
 
-  Then Add Relantioship
-    
+  Step 2 :- Then Add Relantioship
+    class Tag < ApplicationRecord
+      has_and_belongs_to_many :posts
+    end
+
+    class Post < ApplicationRecord
+      has_and_belongs_to_many :tags
+    end
+  
+  Step 3 :- Create Join Table Migration
+    rails generate migration CreateJoinTableUsersRoles posts tags
+
+    Note: Please check in migration if any lines comment then remove comment.
+
+  Step 4 :- Add collection select option in your form. like i used Post form.
+
+    <%= f.collection_select :tag_ids, Tag.all, :id, :name, { prompt: 'Select groups' }, multiple: true %>
+
+  Step 5 :- I'm add habtm option in post form, so you need to permit tag_ids in post 
+            controller. 
+
+    Note: Dont permit only tag_ids if you only permit tag_ids then create single record
+          so permit with array like this tag_ids: []
+
+  #RESULT
+    user.roles # returns an array of roles associated with the user
+    role.users # returns an array of users associated with the role
 
 EXAMPLE 2:
   user : has_and_belongs_to_many :roles
   role : has_and_belongs_to_many :users
-
-JOIN TABLE Based On Model 
-  rails generate migration CreateJoinTableUsersRoles users roles
     
-#RESULT
-  user.roles # returns an array of roles associated with the user
-  role.users # returns an array of users associated with the role
-
 ==============================================================================================
 #4. Polymorphic ==> Require Join Table 
 ==============================================================================================
