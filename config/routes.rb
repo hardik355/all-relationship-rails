@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  # get 'songs/index'
   root 'dashboard#index'
-
   # Has_One Relationship
   get '/users', to: 'users#index' 
 
@@ -32,4 +30,21 @@ Rails.application.routes.draw do
   
   delete '/songs/:id', to: 'songs#destroy'
   get '/songs/:id', to: 'songs#show', as: 'song'
+
+  # HABTM RELATIONSHIP ROUTES
+  get '/posts', to: 'posts#index'
+
+  get '/posts/new', to: 'posts#new'
+  post '/posts', to: 'posts#create'
+
+  get '/posts/:id/edit', to: 'posts#edit', as: 'edit'
+  patch '/posts/:id', to: 'posts#update'
+  put '/posts/:id', to: 'posts#update'
+  
+  put '/posts/:id', to: 'posts#show', as: 'post'
+  delete '/posts/:id', to: 'posts#destroy'
+
+  # TAgG Routes
+  resources :tags
+
 end

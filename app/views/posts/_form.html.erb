@@ -1,0 +1,36 @@
+<p>
+  If you save Record without artist id then give an error 
+  <b>ActiveRecord::RecordInvalid (Validation failed: Artist must exist)</b>
+</p>
+
+<div class="row">
+  <div class="mx-auto col-10 col-md-8 col-lg-6">
+    <%= form_with model: @post do |f| %>
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <%= f.label :title, class: "form-label" %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <%= f.label :description, class: "form-label" %>
+            <%= f.text_field :description, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-4">
+        <div class="col">
+          <div class="form-outline">
+            <%= f.label :tags, class: "form-label" %>
+            </div>
+        </div>
+      </div>
+
+      <%= f.submit 'Submit', class: "btn btn-primary btn-block mb-4" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<tr>
+<th scope="row"><%= tag.name %></th>
+<th scope="row"><%= link_to 'Edit', edit_tag_path(id: tag.id) %></th>
+<th scope="row"><%= link_to 'Show', tag_path(id: tag.id) %></th>
+<th scope="row"><%= link_to 'Destroy', tag_path(tag), data: { turbo_method: :delete } %></th>
+</tr>

@@ -33,9 +33,21 @@ Example 2:
   User       :- has_one :biography
   Biography  :- belongs_to :user
 
-  User Controller + Model already have created
-  rails g model Biography bio:text user:references
+Example 3:
+	has_one    :profile
+	belongs_to :user
 
+Example 4:
+	has_one :office
+	belongs_to :office 
+
+Example 5:
+	has_one :book 
+	belongs_to : author
+
+
+User Controller + Model already have created
+rails g model Biography bio:text user:references
 ==============================================================================================
 #2. Has Many
 ==============================================================================================
@@ -51,19 +63,35 @@ Example 3:
   Artist    :- has_many :song
   Song      :- belongs_to :artist
 
-
   rails g model Artist name:string
   rails g model Song name:string artist:references
+
+Example 4:
+	has_many   :stories
+  belongs_to :user
 ==============================================================================================
 #3. HABTM
 ==============================================================================================
 Example 1: 
   Post :  has_and_belongs_to_many :tags
-
   Tag  :  has_and_belongs_to_many :posts
 
+  rails g scaffold post title:text description:text
+  rails g scaffold tag title:text
 
-Example 2:
+  Then Add Relantioship
+    
+
+EXAMPLE 2:
+  user : has_and_belongs_to_many :roles
+  role : has_and_belongs_to_many :users
+
+JOIN TABLE Based On Model 
+  rails generate migration CreateJoinTableUsersRoles users roles
+    
+#RESULT
+  user.roles # returns an array of roles associated with the user
+  role.users # returns an array of users associated with the role
 
 ==============================================================================================
 #4. Polymorphic ==> Require Join Table 
@@ -77,6 +105,11 @@ Example 2:
   Article  :- has_many :comments
   comments :- belongs_to :post
 
+Example 2:
+	post: has_many :comments
+	log:  has_many :comments
+
+	rails g model comment commentable:references{polymorphic} content:text
 ==============================================================================================
 #5. Has One Through
 ==============================================================================================
@@ -86,5 +119,38 @@ Example 2:
 ==============================================================================================
 #6. Has Many Through
 ==============================================================================================
-Example 1:
+EXAMPLE 1:
+
+	class User < ApplicationRecord
+		has_many :user_roles
+		has_many :roles, through: :user_roles
+	end
+
+	class UserRoles < ApplicationRecord
+		belongs_to :user
+		belongs_to :role
+	end
+	
+	class Role < ApplicationRecord
+		has_many :user_roles
+		has_many :users, through: :user_roles
+	end
+
 Example 2:
+
+==============================================================================================
+Self join Table
+==============================================================================================
+
+
+
+==============================================================================================
+Shallow Nested Routes
+==============================================================================================
+resource :articles do
+    resource :comments, shallow :true
+  end 
+
+rails d scaffold Article name:string
+
+
