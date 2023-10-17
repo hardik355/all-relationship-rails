@@ -27,8 +27,26 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def all_post
+    @posts = Post.all
+  end
+
+  def create_comment
+    post = Post.find_by(id: params[:post_id])
+    @comment = post.comments.new(comment_params)
+    if @comment.save
+      redirect_to all_post_path, notice: 'Comment created.'
+    else
+      render 'new'
+    end
+  end
+
   private
   def post_params
     params.require(:post).permit(:title, :description, tag_ids: [])
   end
+
+  def comment_params
+    params.require(:comment).permit(:title)
+  end 
 end

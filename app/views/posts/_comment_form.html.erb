@@ -1,0 +1,17 @@
+<div class="timeline-comment-box">
+   <div class="user">
+      <img src="https://bootdey.com/img/Content/avatar/avatar3.png">
+    </div>
+    <div class="card my-1">
+      <div class="card-body">
+        <p class="font-weight-bold">Comments</p>
+        <%= form_with(model: [post.comments.build], url: create_comment_path(post_id: post.id), method: :post, remote: true) do |f| %>
+          <div class="form-group">
+            <%= f.label 'New comment' %>
+            <%= f.text_field :title, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+</div>

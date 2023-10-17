@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'dashboard#index'
   # Has_One Relationship
-  get '/users', to: 'users#index' 
+  get '/users', to: 'users#index'
 
   get '/users/new', to: 'users#new'
   post '/users', to: 'users#create'
@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   get '/artists', to: 'artists#index'
   post '/artists', to: 'artists#create'
   get '/artists/new', to: 'artists#new'
- 
-  # Songs Routes 
+
+  # Songs Routes
   get '/songs', to: 'songs#index'
 
   get '/songs/new', to: 'songs#new'
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   get '/songs/:id/edit', to: 'songs#edit', as: 'edit_song'
   put   '/songs/:id', to: 'songs#update'
   patch '/songs/:id', to: 'songs#update'
-  
+
   delete '/songs/:id', to: 'songs#destroy'
   get '/songs/:id', to: 'songs#show', as: 'song'
 
@@ -40,9 +40,13 @@ Rails.application.routes.draw do
   get '/posts/:id/edit', to: 'posts#edit', as: 'edit'
   patch '/posts/:id', to: 'posts#update'
   put '/posts/:id', to: 'posts#update'
-  
+
   put '/posts/:id', to: 'posts#show', as: 'post'
   delete '/posts/:id', to: 'posts#destroy'
+
+  get 'all_post', to: 'posts#all_post'
+
+  post 'create_comment', to: 'posts#create_comment'
 
   # TAgG Routes
   resources :tags
